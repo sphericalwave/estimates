@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Estimate: Rear deck, Bow Street | sphericalwave</title>
+<link rel="icon" type="image/png" href="https://sphericalwave.com/favicon.png">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<!-- Live site stylesheet: this page follows sphericalwave.com's look automatically -->
+<link rel="stylesheet" href="https://sphericalwave.com/styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+/* Estimate-only pieces, built from the site's --sw-* tokens (defined on .sw-home in styles.css) */
+.est{max-width:60rem;padding-top:1.5rem;padding-bottom:4rem;position:relative;z-index:1}
+.est p{max-width:65ch}
+.est h2{font-family:var(--sw-font-display);font-weight:500;font-size:1.5rem;letter-spacing:0;color:var(--sw-on-surface);margin:.5rem 0 1rem}
+.est .note{color:var(--sw-on-surface-variant);font-size:.9rem}
+.est section{margin:0}
+
+/* Hero */
+.est .sw-home__hero{text-align:left}
+.est .sw-home__title{max-width:16ch}
+.rings{position:absolute;right:-9rem;top:-9rem;width:30rem;height:30rem;pointer-events:none;opacity:.45}
+.sw{--sw-period:6s}
+.sw circle{stroke:var(--sw-primary);stroke-width:1.5;transform-box:fill-box;transform-origin:center;animation:sw-expand var(--sw-period) linear infinite}
+.sw circle:nth-child(2){animation-delay:calc(var(--sw-period)*-1/6)}
+.sw circle:nth-child(3){animation-delay:calc(var(--sw-period)*-2/6)}
+.sw circle:nth-child(4){animation-delay:calc(var(--sw-period)*-3/6)}
+.sw circle:nth-child(5){animation-delay:calc(var(--sw-period)*-4/6)}
+.sw circle:nth-child(6){animation-delay:calc(var(--sw-period)*-5/6)}
+@keyframes sw-expand{0%{transform:scale(.02);opacity:0}8%{opacity:1}100%{transform:scale(1);opacity:0}}
+@media (prefers-reduced-motion:reduce){.sw circle{animation-play-state:paused}}
+.hero-inner{position:relative}
+.total{display:flex;flex-wrap:wrap;align-items:baseline;gap:.25rem 1rem;margin:1.5rem 0}
+.total strong{font-family:var(--sw-font-display);font-size:clamp(1.75rem,5vw,2.5rem);font-weight:600;color:var(--sw-on-surface)}
+.total span{color:var(--sw-on-surface-variant)}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:1rem 2rem;margin:0 0 2rem}
+.meta div{border-top:1px solid var(--sw-primary-container);padding-top:.5rem}
+.meta dt{font-family:var(--sw-font-mono);font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--sw-primary)}
+.meta dd{margin:.15rem 0 0;color:var(--sw-on-surface)}
+.est .sw-home__cta{justify-content:flex-start}
+.est button.sw-home__btn{cursor:pointer}
+
+/* Timing */
+.temp{font-family:var(--sw-font-display);font-weight:600;font-size:1.2rem;color:var(--sw-primary)}
+
+/* Design */
+.cad{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:1.5rem;align-items:start}
+.thumb{position:relative;aspect-ratio:4/3;background:var(--sw-surface-container);border:1px dashed rgba(180,197,255,.4);
+  border-radius:8px;overflow:hidden;display:grid;place-items:center;text-align:center;color:var(--sw-primary)}
+.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.thumb.has-img{border-style:solid}
+.thumb .ph{padding:1rem;font-family:var(--sw-font-mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase}
+.thumb .ph svg{display:block;margin:0 auto .75rem;width:4.5rem;height:4.5rem}
+.est .sw-home__btn[aria-disabled="true"]{opacity:.55;pointer-events:none;border-style:dashed}
+
+/* Scope */
+.scope{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:.75rem 2rem}
+.scope li{padding-left:1.25rem;position:relative;color:var(--sw-on-surface-variant)}
+.scope li::before{content:"";position:absolute;left:0;top:.55em;width:.5rem;height:.5rem;border-radius:50%;border:2px solid var(--sw-primary)}
+
+/* Cost table: resets the site's global zebra table styles */
+.table-wrap{overflow-x:auto}
+.est table{width:100%;border-collapse:collapse;min-width:30rem;font-family:var(--sw-font-body);font-variant-numeric:tabular-nums}
+.est th,.est td{padding:.6rem 1rem;text-align:left;vertical-align:top;border:0;color:var(--sw-on-surface-variant)}
+.est tr:nth-child(even){background:transparent}
+.est th{font-family:var(--sw-font-mono);font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--sw-primary);border-bottom:1px solid var(--sw-outline)}
+.est td.num,.est th.num{text-align:right;white-space:nowrap}
+.est tr.group td{padding-top:1.25rem;font-family:var(--sw-font-display);font-weight:600;color:var(--sw-on-surface)}
+.est tr.sub td{border-top:1px solid var(--sw-outline);color:var(--sw-on-surface);font-weight:600}
+.est tr.grand td{border-top:2px solid var(--sw-primary-container);color:var(--sw-on-surface);font-weight:700;font-size:1.05rem}
+.est td small{display:block;font-size:.8rem;opacity:.8}
+
+/* Schedule */
+ol.steps{margin:0;padding:0;list-style:none;counter-reset:s}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:2.25rem 1fr;gap:.75rem;padding:.6rem 0;border-top:1px solid var(--sw-outline);color:var(--sw-on-surface-variant)}
+ol.steps li::before{content:counter(s);width:1.75rem;height:1.75rem;border-radius:50%;border:1px solid var(--sw-primary);color:var(--sw-primary);display:grid;place-items:center;font-family:var(--sw-font-mono);font-size:12px}
+ol.steps b{color:var(--sw-on-surface);font-weight:600}
+
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.cols ul{margin:0;padding-left:1.1rem;color:var(--sw-on-surface-variant)}
+.cols li{margin:.25rem 0}
+
+.sign{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:2rem;margin-top:1.5rem}
+.sign div{border-top:1px solid var(--sw-on-surface-variant);padding-top:.4rem;font-size:.85rem;color:var(--sw-on-surface-variant);margin-top:2.5rem}
+.est-footer{padding-top:2rem;color:var(--sw-on-surface-variant);font-size:.9rem}
+
+@media (max-width:40rem){
+  .cad,.cols{grid-template-columns:1fr}
+  .rings{right:-14rem;top:-12rem;opacity:.25}
+}
+
+/* Print / Save as PDF: plain black on white, no glass, no buttons */
+@page{margin:14mm}
+@media print{
+  html,body{background:#fff !important;color:#000 !important;font-size:11pt}
+  body::before,.rings,.no-print,.sw-home__wave-line{display:none !important}
+  .est{max-width:none;padding:0}
+  .sw-home{--sw-on-surface:#000;--sw-on-surface-variant:#222;--sw-primary:#1e3f8a;--sw-primary-container:#1e3f8a;--sw-outline:#bbb}
+  .sw-home__hero,.sw-home__glass{background:none !important;border:1px solid #ccc !important;backdrop-filter:none !important;box-shadow:none !important}
+  .sw-home__glass{margin:0 0 1rem}
+  .sw-home__hero{margin-bottom:1rem}
+  .sw-enter,.sw-enter-2{animation:none !important}
+  a,strong,b{color:#000 !important;text-decoration:none}
+  section,.steps li,tr{break-inside:avoid}
+  .thumb{border-color:#bbb}
+  .est-footer{padding-top:1rem}
+}
+</style>
+</head>
+<body>
+<main class="container est sw-home">
+
+  <header class="sw-home__hero sw-enter">
+    <svg class="rings" viewBox="0 0 400 400" aria-hidden="true" fill="none">
+      <g class="sw"><circle cx="200" cy="200" r="198" vector-effect="non-scaling-stroke"/><circle cx="200" cy="200" r="198" vector-effect="non-scaling-stroke"/><circle cx="200" cy="200" r="198" vector-effect="non-scaling-stroke"/><circle cx="200" cy="200" r="198" vector-effect="non-scaling-stroke"/><circle cx="200" cy="200" r="198" vector-effect="non-scaling-stroke"/><circle cx="200" cy="200" r="198" vector-effect="non-scaling-stroke"/></g>
+    </svg>
+    <div class="hero-inner">
+      <span class="sw-home__chip">
+        <span class="sw-home__dot"></span>
+        <span class="sw-home__label">Estimate &middot; sphericalwave</span>
+      </span>
+      <h1 class="sw-home__title">Rear deck, second storey</h1>
+      <p class="sw-home__lead">A 10 × 20 ft pressure-treated deck off the existing ledger, with stairs to grade and full guard railing.</p>
+      <p class="total"><strong id="hero-total">$0 – $0</strong><span>estimated total</span></p>
+      <dl class="meta">
+        <div><dt>Prepared for</dt><dd>[Customer name]</dd></div>
+        <div><dt>Site</dt><dd>[Civic #] Bow Street</dd></div>
+        <div><dt>Estimate</dt><dd>#2026-[###]</dd></div>
+        <div><dt>Issued</dt><dd>September 21, 2026</dd></div>
+        <div><dt>Valid until</dt><dd>October 21, 2026</dd></div>
+      </dl>
+      <div class="sw-home__cta no-print">
+        <button type="button" class="sw-home__btn sw-home__btn--primary" onclick="window.print()">Save as PDF</button>
+        <a class="sw-home__btn sw-home__btn--ghost" href="#accept-h">How to go ahead</a>
+      </div>
+    </div>
+  </header>
+
+  <hr class="sw-home__wave-line">
+
+  <aside class="sw-home__glass sw-home__panel sw-home__panel--accent sw-enter-2" aria-labelledby="timing-h">
+    <span class="sw-home__label">Timing</span>
+    <h2 id="timing-h">We can start right away, and timing matters</h2>
+    <p>The footings have to be poured before the cold sets in. Concrete cures through a chemical reaction that slows sharply in cold weather, and if it freezes in the first few days it can lose much of its strength for good.</p>
+    <p class="temp">The cut-off: overnight lows staying above 5&nbsp;°C</p>
+    <p>That's the point where building standards treat concrete work as cold-weather work, needing heaters and insulated blankets. In the Halifax area, nights usually start dropping below 5&nbsp;°C in late October.</p>
+    <p>Once the footings are in, framing, decking, railings and stairs can carry on into colder weather. If the footings miss this window, the deck would most likely wait until spring. To keep this year's timeline, please confirm by <strong>[date]</strong> so the permit can go in right away.</p>
+  </aside>
+
+  <hr class="sw-home__wave-line">
+
+  <section class="sw-home__glass sw-home__panel" aria-labelledby="design-h">
+    <span class="sw-home__label">01 &middot; Design</span>
+    <h2 id="design-h">Modelled in CAD first</h2>
+    <div class="cad">
+      <div class="thumb" id="thumb">
+        <div class="ph" id="thumb-ph">
+          <svg viewBox="0 0 72 72" fill="none" stroke="currentColor" aria-hidden="true">
+            <circle cx="36" cy="36" r="6" stroke-width="2"/><circle cx="36" cy="36" r="16" stroke-width="1.5"/>
+            <circle cx="36" cy="36" r="26" stroke-width="1.2"/><circle cx="36" cy="36" r="35" stroke-width=".9"/>
+          </svg>
+          Design preview will appear here
+        </div>
+      </div>
+      <div>
+        <p>The deck is modelled in Onshape before any digging starts. The model sets post and footing locations, checks beam and joist spans against Nova Scotia building code tables, lays out the stairs, and produces the drawings for the HRM permit.</p>
+        <p class="note">You can open the model in any browser, turn it around, and look at it from the yard or the back door.</p>
+        <a class="sw-home__btn sw-home__btn--ghost mt-2 no-print" id="cad-link" href="#" aria-disabled="true">3D model coming soon</a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="sw-home__wave-line">
+
+  <section class="sw-home__glass sw-home__panel" aria-labelledby="scope-h">
+    <span class="sw-home__label">02 &middot; Scope</span>
+    <h2 id="scope-h">What's included</h2>
+    <ul class="scope">
+      <li>Site measurement and 3D design in Onshape</li>
+      <li>Permit drawings and HRM building permit</li>
+      <li>Four concrete footings below frost depth, plus a stair pad</li>
+      <li>6×6 posts and a built-up beam across the 20 ft side</li>
+      <li>2×8 joists at 16" on centre, hung from the existing ledger</li>
+      <li>5/4×6 pressure-treated decking, 200 sq ft</li>
+      <li>42" guard railing on all open sides, about 36 ft</li>
+      <li>Stairs to grade with handrails on both sides</li>
+      <li>Deliveries, equipment rental, and site cleanup</li>
+    </ul>
+  </section>
+
+  <hr class="sw-home__wave-line">
+
+  <section class="sw-home__glass sw-home__panel" aria-labelledby="cost-h">
+    <span class="sw-home__label">03 &middot; Cost</span>
+    <h2 id="cost-h">Cost breakdown</h2>
+    <p class="note">Shown as a low and high range. The final price depends mostly on what's found when digging the footings. Material and rental prices include the taxes paid on them; no HST is added to this estimate.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">Item</th><th scope="col" class="num">Low</th><th scope="col" class="num">High</th></tr></thead>
+        <tbody id="cost-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <hr class="sw-home__wave-line">
+
+  <section class="sw-home__glass sw-home__panel" aria-labelledby="sched-h">
+    <span class="sw-home__label">04 &middot; Schedule</span>
+    <h2 id="sched-h">How the job runs</h2>
+    <p class="note">About 80–110 hours of work in total, spread over roughly three to four weeks, including permit time and concrete curing.</p>
+    <ol class="steps">
+      <li><div><b>Measure and design.</b> Site visit, 3D model, your sign-off on the layout.</div></li>
+      <li><div><b>Permit.</b> Drawings submitted to HRM; work starts once approved.</div></li>
+      <li><div><b>Footings.</b> Dig, set forms, pour while nights are still above 5&nbsp;°C. Concrete cures for several days.</div></li>
+      <li><div><b>Framing.</b> Posts, beam, joists, hangers and bracing.</div></li>
+      <li><div><b>Decking.</b> Boards installed and trimmed.</div></li>
+      <li><div><b>Railings and stairs.</b> Guards, stair stringers, treads and handrails.</div></li>
+      <li><div><b>Final inspection and cleanup.</b> HRM inspection, site cleared.</div></li>
+    </ol>
+  </section>
+
+  <hr class="sw-home__wave-line">
+
+  <section class="sw-home__glass sw-home__panel" aria-labelledby="terms-h">
+    <span class="sw-home__label">05 &middot; Terms</span>
+    <h2 id="terms-h">Assumptions and exclusions</h2>
+    <div class="cols">
+      <div>
+        <p class="note">This estimate assumes</p>
+        <ul>
+          <li>The existing ledger is sound, properly flashed, and fastened for a deck of this size</li>
+          <li>The deck surface is about 9 ft above grade</li>
+          <li>Footings can be dug with a power auger to frost depth</li>
+          <li>Clear access for deliveries to the back yard</li>
+        </ul>
+      </div>
+      <div>
+        <p class="note">Not included</p>
+        <ul>
+          <li>Rock or ledge removal beyond normal digging</li>
+          <li>Ledger repair or replacement, if needed</li>
+          <li>Stain or sealer (wood should dry for a season first)</li>
+          <li>Composite decking, aluminum or glass railings, lighting</li>
+          <li>Landscaping around the finished deck</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="sw-home__wave-line">
+
+  <section class="sw-home__glass sw-home__panel sw-home__panel--accent" aria-labelledby="accept-h">
+    <span class="sw-home__label">06 &middot; Acceptance</span>
+    <h2 id="accept-h">Going ahead</h2>
+    <p>To go ahead, sign below or reply to confirm. A deposit of [__]% is due before materials are ordered, with the balance on completion. Any changes to the design are priced before the work is done.</p>
+    <div class="sign">
+      <div>Customer signature and date</div>
+      <div>Aaron, sphericalwave</div>
+    </div>
+    <div class="sw-home__cta mt-4 no-print">
+      <button type="button" class="sw-home__btn sw-home__btn--primary" onclick="window.print()">Save as PDF</button>
+      <a class="sw-home__btn sw-home__btn--ghost" href="sms:+19022931881">Text Aaron</a>
+    </div>
+  </section>
+
+  <footer class="est-footer">
+    Aaron &nbsp;|&nbsp; sphericalwave &nbsp;|&nbsp; Dartmouth, Nova Scotia<br>
+    <a href="tel:+19022931881">902-293-1881</a> &nbsp;|&nbsp; <a href="mailto:hello@sphericalwave.com">hello@sphericalwave.com</a> &nbsp;|&nbsp; <a href="https://sphericalwave.com/design-build/">sphericalwave.com</a>
+  </footer>
+</main>
+
+<script>
+/* ---- Swap these in when the CAD work is done ---- */
+const ONSHAPE_URL = "";   // e.g. "https://cad.onshape.com/documents/..."
+const THUMBNAIL_SRC = ""; // a data: URI of a render, or leave empty
+
+const RATE = 65;          // labour rate, $/hr
+const PURCHASE_TAX = 0.14; // HST paid on materials and rentals, built into those prices
+const CONTINGENCY = 0.10; // applied to materials and site costs
+
+const groups = [
+  { name: "Materials", items: [
+    ["Footings", "Forms, concrete, post bases", 300, 500],
+    ["Posts", "6×6 pressure-treated", 300, 500],
+    ["Beam", "Triple 2×10, 20 ft", 250, 400],
+    ["Joists and rim", "About 16 joists plus blocking", 400, 600],
+    ["Structural hardware", "Hangers, ties, structural screws", 350, 550],
+    ["Decking", "5/4×6 pressure-treated, 200 sq ft", 700, 950],
+    ["Guard railing", "About 36 linear ft, 42\" high", 600, 1000],
+    ["Stairs", "Stringers, treads, handrails", 500, 1000],
+  ]},
+  { name: "Site and equipment", items: [
+    ["Power auger rental", "1–2 days", 150, 350],
+    ["Lumber deliveries", "1–2 drops", 75, 300],
+    ["Fuel and supply runs", "", 50, 150],
+    ["HRM building permit", "", 150, 400, "notax"],
+  ]},
+  { name: "Labour", hours: true, items: [
+    ["Design and drawings", "Onshape model, span checks, permit drawings, cut list", 6, 14],
+    ["Construction", "Footings through final cleanup", 74, 96],
+  ]},
+];
+
+const fmt = n => n.toLocaleString("en-CA", { style: "currency", currency: "CAD", maximumFractionDigits: 0 });
+const body = document.getElementById("cost-body");
+const row = (html, cls) => { const tr = document.createElement("tr"); if (cls) tr.className = cls; tr.innerHTML = html; body.appendChild(tr); };
+
+let lo = 0, hi = 0, contLo = 0, contHi = 0;
+for (const g of groups) {
+  row(`<td colspan="3">${g.name}</td>`, "group");
+  let gLo = 0, gHi = 0;
+  for (const [label, detail, a, b, flag] of g.items) {
+    const tax = (g.hours || flag === "notax") ? 1 : 1 + PURCHASE_TAX;
+    const l = Math.round((g.hours ? a * RATE : a) * tax), h = Math.round((g.hours ? b * RATE : b) * tax);
+    const d = g.hours ? `${a}–${b} hrs at ${fmt(RATE)}/hr${detail ? ". " + detail : ""}` : detail;
+    row(`<td>${label}${d ? `<small>${d}</small>` : ""}</td><td class="num">${fmt(l)}</td><td class="num">${fmt(h)}</td>`);
+    gLo += l; gHi += h;
+  }
+  row(`<td>${g.name} subtotal</td><td class="num">${fmt(gLo)}</td><td class="num">${fmt(gHi)}</td>`, "sub");
+  lo += gLo; hi += gHi;
+  if (!g.hours) { contLo += gLo * CONTINGENCY; contHi += gHi * CONTINGENCY; }
+}
+row(`<td colspan="3">Other</td>`, "group");
+row(`<td>Contingency<small>${CONTINGENCY * 100}% of materials and site costs</small></td><td class="num">${fmt(contLo)}</td><td class="num">${fmt(contHi)}</td>`);
+lo += contLo; hi += contHi;
+const tLo = lo, tHi = hi;
+row(`<td>Estimated total</td><td class="num">${fmt(tLo)}</td><td class="num">${fmt(tHi)}</td>`, "grand");
+document.getElementById("hero-total").textContent = `${fmt(tLo)} – ${fmt(tHi)}`;
+
+if (ONSHAPE_URL) {
+  const a = document.getElementById("cad-link");
+  a.href = ONSHAPE_URL; a.target = "_blank"; a.rel = "noopener";
+  a.removeAttribute("aria-disabled"); a.textContent = "Open the 3D model";
+}
+if (THUMBNAIL_SRC) {
+  const t = document.getElementById("thumb");
+  t.classList.add("has-img"); document.getElementById("thumb-ph").remove();
+  const img = new Image(); img.src = THUMBNAIL_SRC; img.alt = "3D render of the deck design"; t.appendChild(img);
+}
+</script>
+</body>
+</html>
