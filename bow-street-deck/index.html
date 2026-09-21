@@ -308,10 +308,11 @@ ol.steps b{color:var(--sw-on-surface);font-weight:600}
   <section class="sw-home__glass sw-home__panel sw-home__panel--accent" aria-labelledby="accept-h">
     <span class="sw-home__label">06 &middot; Next steps</span>
     <h2 id="accept-h">Going ahead</h2>
-    <p>This is a preliminary estimate based on photos. If you'd like to go ahead, here's how it firms up:</p>
+    <p>This is a preliminary estimate based on photos. Going ahead depends on agreeing the scope of work and the project schedule; here's how it firms up:</p>
     <ol class="steps">
       <li><div><b>Site measure.</b> A visit to measure the deck height, wall lengths, the existing ledgers and the slope of the yard, and to check your house plans if you have them.</div></li>
-      <li><div><b>Firm price and contract.</b> The model and bill of materials are updated from the measurements, and we draw up a written contract with the final price.</div></li>
+      <li><div><b>Scope and schedule.</b> We agree exactly what's included (deck, stair, patio, options like cedar or aluminum balusters) and set the schedule, starting with the footing pour before overnight lows drop below 5&nbsp;°C.</div></li>
+      <li><div><b>Firm price and contract.</b> The model and bill of materials are updated from the measurements, and we draw up a written contract with the agreed scope, schedule and final price.</div></li>
       <li><div><b>Payment.</b> You pay for materials directly, at cost with the receipts, as they're ordered. One third of the labour (about <span id="labour-third">$0</span>) is due before work starts, with the balance on completion.</div></li>
     </ol>
     <p>Any changes to the design are priced before the work is done.</p>
@@ -388,7 +389,7 @@ const choice = { wood: "pt", balusters: "wood" };
 
 const groups = [
   { name: "Materials", items: [
-    ["Footings", "7 × 10\" concrete piers to 4 ft in tube forms, concrete, post bases", 380, 600],
+    ["Footings", "7 × 10\" concrete piers to 4 ft: about 35 × 30 kg bags of concrete and 10\" tube forms", 420, 600],
     ["Posts", "7 × 6×6 pressure-treated", 400, 560],
     ["Beams", "Triple 2×10, about 21 ft along the back and 21 ft along the side", 400, 550],
     ["Header and rims", "2×8 header past the corner and rim joists (both ledgers are already on the house)", 170, 300],
@@ -399,7 +400,7 @@ const groups = [
     ["Guard railing", "About 54 linear ft, 42\" high: posts, rails and caps", 1100, 1850],
     ["Balusters", "About 135 pressure-treated 2×2 balusters", 280, 380],
     ["Stair", "6 ft wide, 6 risers: 2×12 stringers on a doubled 2×12 header, 3 stringer ties, treads, closed risers, guard and 2×6 handrail", 600, 980],
-    ["Stair landing", "6 ft concrete landing cut into the slope, low retaining edge", 400, 750],
+    ["Stair landing", "6 ft concrete landing cut into the slope: about 35 × 30 kg bags of concrete, wire mesh, low retaining edge", 480, 750],
     ["Patio stones", "About 250 sq ft of 24\" slabs, gravel base, bedding sand", 1100, 1800],
   ]},
   { name: "Fasteners and connectors", items: [
@@ -407,7 +408,7 @@ const groups = [
     ["Joist hangers", "25 galvanized 2×8 hangers with hanger screws", 160, 220],
     ["Beam lamination", "60 structural screws through the 3 plies, 2 rows at 16\"", 140, 200],
     ["Beam hanger", "Heavy face-mount hanger carrying the side beam off the back beam, with its screws", 40, 70],
-    ["Post bases", "7 raised post bases with anchors into the piers", 260, 360],
+    ["Post bases", "7 raised post bases with anchors into the piers", 280, 560],
     ["Post caps", "7 caps tying the 6×6 posts to the triple beams", 140, 220],
     ["Knee brace screws", "48 × 6\" structural screws, 2 at each end of each brace", 75, 110],
     ["Rim, header, V-brace, stair tie and blocking screws", "About 225 × 3\" structural screws, plus about 170 × 3-1/2\" screws for the joist blocking", 150, 220],
@@ -418,7 +419,8 @@ const groups = [
   ]},
   { name: "Site and equipment", items: [
     ["Auger and plate compactor rental", "Footings, landing and patio base", 250, 500],
-    ["Deliveries", "Lumber, gravel and stone", 200, 500],
+    ["Cement mixer rental", "About 2 days: one pour for the piers, one for the landing", 120, 220],
+    ["Deliveries", "About 3 loads: lumber, concrete bags, gravel and stone", 250, 500],
     ["Soil disposal", "From the landing cut and patio excavation", 100, 300],
     ["Fuel and supply runs", "", 75, 200],
     ["HRM building permit", "", 150, 400, "notax"],
