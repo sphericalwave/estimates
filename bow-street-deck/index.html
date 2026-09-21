@@ -80,6 +80,11 @@ button.thumb:hover{border-color:var(--sw-primary) !important}
   font-family:var(--sw-font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--sw-on-surface)}
 .hint-touch{display:none !important}
 @media (hover:none),(pointer:coarse){.hint-mouse{display:none !important}.hint-touch{display:inline-block !important}}
+.cad-media{display:grid;gap:1rem}
+.thumb.drawing{aspect-ratio:1200/927;background:#fff}
+button.thumb.drawing,button.thumb.drawing:hover{background-color:#fff !important}
+.thumb.drawing img{object-fit:contain;background:#fff}
+.box-pdf{display:block;width:auto;height:auto;max-width:min(92vw,1100px);max-height:78vh;background:#fff}
 .box-model{display:block;width:min(92vw,1100px);height:min(70vh,720px);background:var(--sw-surface-container);--poster-color:transparent}
 .thumb .ph{padding:1rem;font-family:var(--sw-font-mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase}
 .thumb .ph svg{display:block;margin:0 auto .75rem;width:4.5rem;height:4.5rem}
@@ -186,6 +191,7 @@ ol.steps b{color:var(--sw-on-surface);font-weight:600}
     <span class="sw-home__label">01 &middot; Design</span>
     <h2 id="design-h">Built from your drawings</h2>
     <div class="cad">
+      <div class="cad-media">
       <button type="button" class="thumb has-img" id="thumb" aria-haspopup="dialog" aria-label="Open the 3D model">
         <model-viewer id="thumb-model" src="deck.glb" alt="3D model of the deck on the back of the house"
           camera-orbit="55deg 66deg 25m" camera-target="3.5m 1.5m 0.5m" field-of-view="30deg"
@@ -193,11 +199,16 @@ ol.steps b{color:var(--sw-on-surface);font-weight:600}
           shadow-intensity="0.6" exposure="1.05" loading="lazy"></model-viewer>
         <span class="thumb-cta no-print">Tap to explore in 3D</span>
       </button>
+      <button type="button" class="thumb has-img drawing" id="drawing-thumb" aria-haspopup="dialog" aria-label="Open the drawing">
+        <img src="drawing-preview.png" alt="Drawing: plan view and two elevations of the deck and house" loading="lazy">
+        <span class="thumb-cta no-print">Tap to view the drawing</span>
+      </button>
+      </div>
       <div>
         <p>Your house plans very likely already show this deck. If you can share them, the CAD work is quick: the deck is modelled from your drawings rather than designed from scratch.</p>
         <p>The model's main job is the <strong>bill of materials</strong>: every board, hanger, bolt and screw counted from the model, so the price and the lumber order come from the same place. It also confirms post and footing locations, checks spans against Nova Scotia code tables, and lays out the stairs.</p>
         <p class="note">The model shown here is built from photos of the house, so sizes are approximate until they're measured on site or checked against your drawings.</p>
-        <a class="sw-home__btn sw-home__btn--ghost mt-2 no-print" id="cad-link" href="https://cad.onshape.com/documents/5bd4d724a4cf6056192267cf/w/d2bd55c5807cf1d79f614a3d/e/b3c7dc5f6f78c7922f3e0adf" target="_blank" rel="noopener">Open in Onshape</a>
+        <a hidden class="sw-home__btn sw-home__btn--ghost mt-2 no-print" id="cad-link" href="https://cad.onshape.com/documents/5bd4d724a4cf6056192267cf/w/d2bd55c5807cf1d79f614a3d/e/b3c7dc5f6f78c7922f3e0adf" target="_blank" rel="noopener">Open in Onshape</a>
       </div>
     </div>
   </section>
@@ -352,6 +363,17 @@ ol.steps b{color:var(--sw-on-surface);font-weight:600}
   </figure>
 </dialog>
 
+<dialog class="sw-lightbox sw-home" id="drawing-box" aria-label="Drawing viewer">
+  <figure class="sw-lightbox__figure">
+    <button class="sw-lightbox__close" type="button" aria-label="Close">&times;</button>
+    <img id="drawing-frame" class="box-pdf" alt="Drawing: plan view and two elevations of the deck and house">
+    <figcaption class="sw-lightbox__caption">
+      <strong class="sw-lightbox__title">Drawing: plan and elevations</strong>
+      <span class="sw-lightbox__text">From the 3D model, based on photos; not to scale for construction. <a href="bowStreetDeck.pdf" target="_blank" rel="noopener">Open the PDF</a></span>
+    </figcaption>
+  </figure>
+</dialog>
+
 <script>
 const RATE = 65;          // labour rate, $/hr
 const PURCHASE_TAX = 0.14; // HST paid on materials and rentals, built into those prices
@@ -488,6 +510,16 @@ document.getElementById("thumb").addEventListener("click", () => {
   if (box.showModal) box.showModal(); else window.open(document.getElementById("cad-link").href, "_blank");
 });
 box.querySelector(".sw-lightbox__close").addEventListener("click", () => box.close());
+
+/* Drawing lightbox: the full-size image only loads the first time it opens; the caption links the PDF */
+const dBox = document.getElementById("drawing-box");
+const dFrame = document.getElementById("drawing-frame");
+document.getElementById("drawing-thumb").addEventListener("click", () => {
+  if (!dFrame.getAttribute("src")) dFrame.setAttribute("src", "drawing.png");
+  if (dBox.showModal) dBox.showModal(); else window.open("bowStreetDeck.pdf", "_blank");
+});
+dBox.querySelector(".sw-lightbox__close").addEventListener("click", () => dBox.close());
+dBox.addEventListener("click", e => { if (e.target === dBox) dBox.close(); });
 box.addEventListener("click", e => { if (e.target === box) box.close(); });
 </script>
 </body>
