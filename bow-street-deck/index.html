@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
+<script type="module" src="model-viewer.min.js"></script><!-- @google/model-viewer 3.5.0, served from here so content blockers don't stop it -->
 <style>
 /* Estimate-only pieces, built from the site's --sw-* tokens (defined on .sw-home in styles.css) */
 .est{max-width:60rem;padding-top:1.5rem;padding-bottom:4rem;position:relative;z-index:1}
@@ -72,7 +72,6 @@
 button.thumb,button.thumb:hover{width:100%;padding:0;font:inherit !important;cursor:zoom-in;
   background-color:var(--sw-surface-container) !important;border:1px solid rgba(180,197,255,.25) !important;color:var(--sw-primary) !important}
 button.thumb:hover{border-color:var(--sw-primary) !important}
-.thumb model-viewer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;--poster-color:transparent}
 .thumb-cta{position:absolute;left:.75rem;bottom:.75rem;padding:.35rem .7rem;border-radius:4px;background:rgba(12,14,18,.72);
   font-family:var(--sw-font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--sw-primary)}
 .box-hint{position:absolute;top:.6rem;left:.6rem;right:4rem;margin:0;pointer-events:none}
@@ -87,6 +86,7 @@ button.thumb.drawing,button.thumb.drawing:hover{background-color:#fff !important
 .pdf-scroll{position:relative;max-width:min(92vw,1100px);max-height:78vh;overflow:auto;background:#fff;-webkit-overflow-scrolling:touch}
 .box-pdf{display:block;width:min(92vw,1100px);max-width:none;height:auto;background:#fff;cursor:zoom-in}
 .pdf-scroll.zoomed .box-pdf{width:2400px;cursor:zoom-out}
+.box-fallback{object-fit:contain}
 .box-model{display:block;width:min(92vw,1100px);height:min(70vh,720px);background:var(--sw-surface-container);--poster-color:transparent}
 .thumb .ph{padding:1rem;font-family:var(--sw-font-mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase}
 .thumb .ph svg{display:block;margin:0 auto .75rem;width:4.5rem;height:4.5rem}
@@ -195,10 +195,7 @@ ol.steps b{color:var(--sw-on-surface);font-weight:600}
     <div class="cad">
       <div class="cad-media">
       <button type="button" class="thumb has-img" id="thumb" aria-haspopup="dialog" aria-label="Open the 3D model">
-        <model-viewer id="thumb-model" src="deck.glb" alt="3D model of the deck on the back of the house"
-          camera-orbit="55deg 66deg 25m" camera-target="3.5m 1.5m 0.5m" field-of-view="30deg"
-          min-camera-orbit="auto auto 4m" interaction-prompt="none"
-          shadow-intensity="0.6" exposure="1.05" loading="lazy"></model-viewer>
+        <img src="model-poster.jpg" alt="3D model of the deck on the back of the house">
         <span class="thumb-cta no-print">Tap to explore in 3D</span>
       </button>
       <button type="button" class="thumb has-img drawing" id="drawing-thumb" aria-haspopup="dialog" aria-label="Open the drawing">
@@ -353,14 +350,15 @@ ol.steps b{color:var(--sw-on-surface);font-weight:600}
     <model-viewer id="box-model" class="box-model" alt="3D model of the deck on the back of the house"
       camera-controls touch-action="none" camera-orbit="55deg 66deg 25m" camera-target="3.5m 1.5m 0.5m" field-of-view="30deg"
       min-camera-orbit="auto 0deg 4m" max-camera-orbit="auto 88deg 60m"
-      interaction-prompt="none" shadow-intensity="0.6" exposure="1.05"></model-viewer>
+      interaction-prompt="none" shadow-intensity="0.6" exposure="1.05" poster="model-poster.jpg"></model-viewer>
+    <img id="box-fallback" class="box-model box-fallback" src="model-poster.jpg" alt="The deck on the back of the house" hidden>
     <p class="box-hint" aria-hidden="true">
       <span class="hint-mouse">Left-click + drag to orbit &middot; Right-click + drag to pan &middot; Scroll to zoom</span>
       <span class="hint-touch">Drag to orbit &middot; Two fingers to pan and zoom</span>
     </p>
     <figcaption class="sw-lightbox__caption">
       <strong class="sw-lightbox__title">Wraparound deck, Bow Street</strong>
-      <span class="sw-lightbox__text">Modelled from site photos; sizes are approximate until checked against your drawings.</span>
+      <span class="sw-lightbox__text" id="box-text">Modelled from site photos; sizes are approximate until checked against your drawings.</span>
     </figcaption>
   </figure>
 </dialog>
@@ -510,8 +508,21 @@ render();
 /* 3D model lightbox: the big viewer only loads the model the first time it opens */
 const box = document.getElementById("model-box");
 const boxModel = document.getElementById("box-model");
+// 3D needs WebGL and the model-viewer script; if either is missing (WebGL off, Lockdown Mode, a blocker), show a still instead
+function has3D() {
+  if (!customElements.get("model-viewer")) return false;
+  try { const c = document.createElement("canvas"); return !!(c.getContext("webgl2") || c.getContext("webgl")); } catch (e) { return false; }
+}
+function useStill() {
+  boxModel.hidden = true;
+  document.getElementById("box-fallback").hidden = false;
+  box.querySelector(".box-hint").hidden = true;
+  document.getElementById("box-text").textContent = "The 3D view couldn't start in this browser, so here's a still. Quitting and reopening the browser usually brings it back.";
+}
+boxModel.addEventListener("error", useStill);
 document.getElementById("thumb").addEventListener("click", () => {
-  if (!boxModel.getAttribute("src")) boxModel.setAttribute("src", "deck.glb");
+  if (!has3D()) useStill();
+  else if (!boxModel.getAttribute("src")) boxModel.setAttribute("src", "deck.glb");
   if (box.showModal) box.showModal(); else window.open(document.getElementById("cad-link").href, "_blank");
 });
 box.querySelector(".sw-lightbox__close").addEventListener("click", () => box.close());
