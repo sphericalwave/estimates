@@ -6,7 +6,7 @@ sphericalwave.com, this repo is served under it automatically:
 
 `https://sphericalwave.com/estimates/<job>/`
 
-- `estimates/<job>/index.html` — one folder per estimate
+- `<job>/index.html` — one folder per estimate, at the repo root (the repo name already supplies `/estimates/`)
 - `assets/` — sphericalwave ring graphics (single, pair, triad, square–nonagon)
 
 ## Styling
