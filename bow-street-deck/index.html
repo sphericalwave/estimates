@@ -84,7 +84,9 @@ button.thumb:hover{border-color:var(--sw-primary) !important}
 .thumb.drawing{aspect-ratio:1200/927;background:#fff}
 button.thumb.drawing,button.thumb.drawing:hover{background-color:#fff !important}
 .thumb.drawing img{object-fit:contain;background:#fff}
-.box-pdf{display:block;width:auto;height:auto;max-width:min(92vw,1100px);max-height:78vh;background:#fff}
+.pdf-scroll{position:relative;max-width:min(92vw,1100px);max-height:78vh;overflow:auto;background:#fff;-webkit-overflow-scrolling:touch}
+.box-pdf{display:block;width:min(92vw,1100px);max-width:none;height:auto;background:#fff;cursor:zoom-in}
+.pdf-scroll.zoomed .box-pdf{width:2400px;cursor:zoom-out}
 .box-model{display:block;width:min(92vw,1100px);height:min(70vh,720px);background:var(--sw-surface-container);--poster-color:transparent}
 .thumb .ph{padding:1rem;font-family:var(--sw-font-mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase}
 .thumb .ph svg{display:block;margin:0 auto .75rem;width:4.5rem;height:4.5rem}
@@ -366,7 +368,10 @@ ol.steps b{color:var(--sw-on-surface);font-weight:600}
 <dialog class="sw-lightbox sw-home" id="drawing-box" aria-label="Drawing viewer">
   <figure class="sw-lightbox__figure">
     <button class="sw-lightbox__close" type="button" aria-label="Close">&times;</button>
-    <img id="drawing-frame" class="box-pdf" alt="Drawing: plan view and two elevations of the deck and house">
+    <div class="pdf-scroll" id="drawing-scroll">
+      <img id="drawing-frame" class="box-pdf" alt="Drawing: plan view and two elevations of the deck and house">
+    </div>
+    <p class="box-hint" aria-hidden="true"><span>Tap the drawing to zoom in &middot; drag or scroll to move around</span></p>
     <figcaption class="sw-lightbox__caption">
       <strong class="sw-lightbox__title">Drawing: plan and elevations</strong>
       <span class="sw-lightbox__text">From the 3D model, based on photos; not to scale for construction. <a href="bowStreetDeck.pdf" target="_blank" rel="noopener">Open the PDF</a></span>
@@ -519,6 +524,18 @@ document.getElementById("drawing-thumb").addEventListener("click", () => {
   if (dBox.showModal) dBox.showModal(); else window.open("bowStreetDeck.pdf", "_blank");
 });
 dBox.querySelector(".sw-lightbox__close").addEventListener("click", () => dBox.close());
+// Tap to zoom to full size at the spot tapped; tap again to fit
+const dScroll = document.getElementById("drawing-scroll");
+dFrame.addEventListener("click", e => {
+  const r = dFrame.getBoundingClientRect();
+  const fx = (e.clientX - r.left) / r.width, fy = (e.clientY - r.top) / r.height;
+  dScroll.classList.toggle("zoomed");
+  if (dScroll.classList.contains("zoomed")) {
+    dScroll.scrollLeft = fx * dFrame.offsetWidth - dScroll.clientWidth / 2;
+    dScroll.scrollTop = fy * dFrame.offsetHeight - dScroll.clientHeight / 2;
+  }
+});
+dBox.addEventListener("close", () => dScroll.classList.remove("zoomed"));
 dBox.addEventListener("click", e => { if (e.target === dBox) dBox.close(); });
 box.addEventListener("click", e => { if (e.target === box) box.close(); });
 </script>
