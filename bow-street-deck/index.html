@@ -55,6 +55,9 @@
   border-radius:8px;overflow:hidden;display:grid;place-items:center;text-align:center;color:var(--sw-primary)}
 .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .thumb.has-img{border-style:solid}
+a.thumb[href]{cursor:pointer;text-decoration:none}
+a.thumb[href]:hover{border-color:var(--sw-primary)}
+a.thumb[href]:hover img{opacity:.9}
 .thumb .ph{padding:1rem;font-family:var(--sw-font-mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase}
 .thumb .ph svg{display:block;margin:0 auto .75rem;width:4.5rem;height:4.5rem}
 .est .sw-home__btn[aria-disabled="true"]{opacity:.55;pointer-events:none;border-style:dashed}
@@ -159,15 +162,15 @@ ol.steps b{color:var(--sw-on-surface);font-weight:600}
     <span class="sw-home__label">01 &middot; Design</span>
     <h2 id="design-h">Modelled in CAD first</h2>
     <div class="cad">
-      <div class="thumb" id="thumb">
+      <a class="thumb" id="thumb" aria-label="Open the 3D model">
         <div class="ph" id="thumb-ph">
           <svg viewBox="0 0 72 72" fill="none" stroke="currentColor" aria-hidden="true">
             <circle cx="36" cy="36" r="6" stroke-width="2"/><circle cx="36" cy="36" r="16" stroke-width="1.5"/>
             <circle cx="36" cy="36" r="26" stroke-width="1.2"/><circle cx="36" cy="36" r="35" stroke-width=".9"/>
           </svg>
-          Design preview will appear here
+          Open the 3D model
         </div>
-      </div>
+      </a>
       <div>
         <p>The deck is modelled in Onshape before any digging starts. The model sets post and footing locations, checks beam and joist spans against Nova Scotia building code tables, lays out the stairs, and produces the drawings for the HRM permit.</p>
         <p class="note">You can open the model in any browser, turn it around, and look at it from the yard or the back door.</p>
@@ -277,8 +280,8 @@ ol.steps b{color:var(--sw-on-surface);font-weight:600}
 
 <script>
 /* ---- Swap these in when the CAD work is done ---- */
-const ONSHAPE_URL = "";   // e.g. "https://cad.onshape.com/documents/..."
-const THUMBNAIL_SRC = ""; // a data: URI of a render, or leave empty
+const ONSHAPE_URL = "https://cad.onshape.com/documents/5bd4d724a4cf6056192267cf/w/d2bd55c5807cf1d79f614a3d/e/b3c7dc5f6f78c7922f3e0adf";
+const THUMBNAIL_SRC = "deck.png"; // render next to this page; placeholder stays if it is missing
 
 const RATE = 65;          // labour rate, $/hr
 const PURCHASE_TAX = 0.14; // HST paid on materials and rentals, built into those prices
@@ -334,14 +337,17 @@ row(`<td>Estimated total</td><td class="num">${fmt(tLo)}</td><td class="num">${f
 document.getElementById("hero-total").textContent = `${fmt(tLo)} – ${fmt(tHi)}`;
 
 if (ONSHAPE_URL) {
-  const a = document.getElementById("cad-link");
-  a.href = ONSHAPE_URL; a.target = "_blank"; a.rel = "noopener";
-  a.removeAttribute("aria-disabled"); a.textContent = "Open the 3D model";
+  for (const a of [document.getElementById("cad-link"), document.getElementById("thumb")]) {
+    a.href = ONSHAPE_URL; a.target = "_blank"; a.rel = "noopener";
+    a.removeAttribute("aria-disabled");
+  }
+  document.getElementById("cad-link").textContent = "Open the 3D model";
 }
 if (THUMBNAIL_SRC) {
   const t = document.getElementById("thumb");
-  t.classList.add("has-img"); document.getElementById("thumb-ph").remove();
-  const img = new Image(); img.src = THUMBNAIL_SRC; img.alt = "3D render of the deck design"; t.appendChild(img);
+  const img = new Image(); img.alt = "3D render of the deck design";
+  img.onload = () => { t.classList.add("has-img"); document.getElementById("thumb-ph").remove(); t.appendChild(img); };
+  img.src = THUMBNAIL_SRC;
 }
 </script>
 </body>
