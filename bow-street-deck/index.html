@@ -209,7 +209,7 @@ ol.steps b{color:var(--sw-on-surface);font-weight:600}
       <li>Deck modelled in CAD from your existing drawings, with a full bill of materials</li>
       <li>Permit drawings and HRM building permit</li>
       <li>Seven concrete footings to 4 ft below grade (below frost): 24" pads with 10" piers</li>
-      <li><span data-opt-text="posts">6×6</span> posts no more than 8 ft apart, with triple 2×10 beams along the back and the right side</li>
+      <li>6×6 posts no more than 8 ft apart, with triple 2×10 beams along the back and the right side</li>
       <li>4×4 knee braces at 45° from each post up to the beam, so the posts can't roll over along the beam</li>
       <li>2×6 diagonal V-bracing under the joists, tying the frame back to the house so it can't rack</li>
       <li>2×8 joists at 16" on centre, off the existing ledger at the back and a new ledger on the side wall</li>
@@ -234,14 +234,6 @@ ol.steps b{color:var(--sw-on-surface);font-weight:600}
         <button type="button" role="radio" data-opt="wood" data-value="cedar" aria-checked="false">Cedar</button>
       </div>
       <p class="note" id="wood-note"></p>
-    </div>
-    <div class="wood-pick" role="radiogroup" aria-label="Post size">
-      <span class="sw-home__label">Posts</span>
-      <div class="wood-toggle">
-        <button type="button" role="radio" data-opt="posts" data-value="p6" aria-checked="true">6×6</button>
-        <button type="button" role="radio" data-opt="posts" data-value="p4" aria-checked="false">4×4</button>
-      </div>
-      <p class="note" id="posts-note"></p>
     </div>
     <div class="table-wrap">
       <table>
@@ -357,15 +349,8 @@ const OPTIONS = {
         "Stair": ["6 ft wide, 6 risers: pressure-treated stringers, cedar treads and guard", 700, 1200],
       } },
   },
-  posts: {
-    p6: { name: "6×6",
-      note: "6×6 posts: what the building code generally expects for posts carrying a beam, and stiffer at this height." },
-    p4: { name: "4×4",
-      note: "4×4 posts: cheaper, but at about 6 ft tall carrying a beam, HRM may not accept them. Confirm before choosing.",
-      items: { "Posts": ["7 × 4×4 pressure-treated", 160, 240] } },
-  },
 };
-const choice = { wood: "pt", posts: "p6" };
+const choice = { wood: "pt" };
 
 const groups = [
   { name: "Materials", items: [
