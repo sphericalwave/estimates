@@ -14,6 +14,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
 <style>
 /* Estimate-only pieces, built from the site's --sw-* tokens (defined on .sw-home in styles.css) */
 .est{max-width:60rem;padding-top:1.5rem;padding-bottom:4rem;position:relative;z-index:1}
@@ -55,9 +56,14 @@
   border-radius:8px;overflow:hidden;display:grid;place-items:center;text-align:center;color:var(--sw-primary)}
 .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .thumb.has-img{border-style:solid}
-a.thumb[href]{cursor:pointer;text-decoration:none}
-a.thumb[href]:hover{border-color:var(--sw-primary)}
-a.thumb[href]:hover img{opacity:.9}
+/* the site styles every <button> blue with !important; the thumbnail is a picture, not a button */
+button.thumb,button.thumb:hover{width:100%;padding:0;font:inherit !important;cursor:zoom-in;
+  background-color:var(--sw-surface-container) !important;border:1px solid rgba(180,197,255,.25) !important;color:var(--sw-primary) !important}
+button.thumb:hover{border-color:var(--sw-primary) !important}
+.thumb model-viewer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;--poster-color:transparent}
+.thumb-cta{position:absolute;left:.75rem;bottom:.75rem;padding:.35rem .7rem;border-radius:4px;background:rgba(12,14,18,.72);
+  font-family:var(--sw-font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--sw-primary)}
+.box-model{display:block;width:min(92vw,1100px);height:min(70vh,720px);background:var(--sw-surface-container);--poster-color:transparent}
 .thumb .ph{padding:1rem;font-family:var(--sw-font-mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase}
 .thumb .ph svg{display:block;margin:0 auto .75rem;width:4.5rem;height:4.5rem}
 .est .sw-home__btn[aria-disabled="true"]{opacity:.55;pointer-events:none;border-style:dashed}
@@ -160,21 +166,20 @@ ol.steps b{color:var(--sw-on-surface);font-weight:600}
 
   <section class="sw-home__glass sw-home__panel" aria-labelledby="design-h">
     <span class="sw-home__label">01 &middot; Design</span>
-    <h2 id="design-h">Modelled in CAD first</h2>
+    <h2 id="design-h">Built from your drawings</h2>
     <div class="cad">
-      <a class="thumb" id="thumb" aria-label="Open the 3D model">
-        <div class="ph" id="thumb-ph">
-          <svg viewBox="0 0 72 72" fill="none" stroke="currentColor" aria-hidden="true">
-            <circle cx="36" cy="36" r="6" stroke-width="2"/><circle cx="36" cy="36" r="16" stroke-width="1.5"/>
-            <circle cx="36" cy="36" r="26" stroke-width="1.2"/><circle cx="36" cy="36" r="35" stroke-width=".9"/>
-          </svg>
-          Open the 3D model
-        </div>
-      </a>
+      <button type="button" class="thumb has-img" id="thumb" aria-haspopup="dialog" aria-label="Open the 3D model">
+        <model-viewer id="thumb-model" src="deck.glb" alt="3D model of the deck on the back of the house"
+          camera-orbit="40deg 68deg 21m" camera-target="2m 1.5m 3m" field-of-view="30deg"
+          min-camera-orbit="auto auto 4m" interaction-prompt="none"
+          shadow-intensity="0.6" exposure="1.05" loading="lazy"></model-viewer>
+        <span class="thumb-cta no-print">Tap to explore in 3D</span>
+      </button>
       <div>
-        <p>The deck is modelled in Onshape before any digging starts. The model sets post and footing locations, checks beam and joist spans against Nova Scotia building code tables, lays out the stairs, and produces the drawings for the HRM permit.</p>
-        <p class="note">You can open the model in any browser, turn it around, and look at it from the yard or the back door.</p>
-        <a class="sw-home__btn sw-home__btn--ghost mt-2 no-print" id="cad-link" href="#" aria-disabled="true">3D model coming soon</a>
+        <p>Your house plans very likely already show this deck. If you can share them, the CAD work is quick: the deck is modelled from your drawings rather than designed from scratch.</p>
+        <p>The model's main job is the <strong>bill of materials</strong>: every board, hanger, bolt and screw counted from the model, so the price and the lumber order come from the same place. It also confirms post and footing locations, checks spans against Nova Scotia code tables, and lays out the stairs.</p>
+        <p class="note">The model shown here is a first mockup from a photo of the house, so sizes are approximate until they're checked against your drawings.</p>
+        <a class="sw-home__btn sw-home__btn--ghost mt-2 no-print" id="cad-link" href="https://cad.onshape.com/documents/5bd4d724a4cf6056192267cf/w/d2bd55c5807cf1d79f614a3d/e/b3c7dc5f6f78c7922f3e0adf" target="_blank" rel="noopener">Open in Onshape</a>
       </div>
     </div>
   </section>
@@ -185,7 +190,7 @@ ol.steps b{color:var(--sw-on-surface);font-weight:600}
     <span class="sw-home__label">02 &middot; Scope</span>
     <h2 id="scope-h">What's included</h2>
     <ul class="scope">
-      <li>Site measurement and 3D design in Onshape</li>
+      <li>Deck modelled in CAD from your existing drawings, with a full bill of materials</li>
       <li>Permit drawings and HRM building permit</li>
       <li>Four concrete footings below frost depth, plus a stair pad</li>
       <li>6×6 posts and a built-up beam across the 20 ft side</li>
@@ -218,7 +223,7 @@ ol.steps b{color:var(--sw-on-surface);font-weight:600}
     <h2 id="sched-h">How the job runs</h2>
     <p class="note">About 80–110 hours of work in total, spread over roughly three to four weeks, including permit time and concrete curing.</p>
     <ol class="steps">
-      <li><div><b>Measure and design.</b> Site visit, 3D model, your sign-off on the layout.</div></li>
+      <li><div><b>Measure and model.</b> Check your drawings against the site, model the deck, produce the bill of materials, your sign-off.</div></li>
       <li><div><b>Permit.</b> Drawings submitted to HRM; work starts once approved.</div></li>
       <li><div><b>Footings.</b> Dig, set forms, pour while nights are still above 5&nbsp;°C. Concrete cures for several days.</div></li>
       <li><div><b>Framing.</b> Posts, beam, joists, hangers and bracing.</div></li>
@@ -278,11 +283,21 @@ ol.steps b{color:var(--sw-on-surface);font-weight:600}
   </footer>
 </main>
 
-<script>
-/* ---- Swap these in when the CAD work is done ---- */
-const ONSHAPE_URL = "https://cad.onshape.com/documents/5bd4d724a4cf6056192267cf/w/d2bd55c5807cf1d79f614a3d/e/b3c7dc5f6f78c7922f3e0adf";
-const THUMBNAIL_SRC = "deck.png"; // render next to this page; placeholder stays if it is missing
+<dialog class="sw-lightbox sw-home" id="model-box" aria-label="3D model viewer">
+  <figure class="sw-lightbox__figure">
+    <button class="sw-lightbox__close" type="button" aria-label="Close">&times;</button>
+    <model-viewer id="box-model" class="box-model" alt="3D model of the deck on the back of the house"
+      camera-controls touch-action="none" camera-orbit="40deg 70deg 17m" camera-target="2m 1.8m 2.5m" field-of-view="30deg"
+      min-camera-orbit="auto 0deg 4m" max-camera-orbit="auto 88deg 60m"
+      interaction-prompt="auto" shadow-intensity="0.6" exposure="1.05"></model-viewer>
+    <figcaption class="sw-lightbox__caption">
+      <strong class="sw-lightbox__title">Rear deck, Bow Street</strong>
+      <span class="sw-lightbox__text">Drag to turn it around, pinch or scroll to zoom. First mockup from a photo; sizes are approximate.</span>
+    </figcaption>
+  </figure>
+</dialog>
 
+<script>
 const RATE = 65;          // labour rate, $/hr
 const PURCHASE_TAX = 0.14; // HST paid on materials and rentals, built into those prices
 const CONTINGENCY = 0.10; // applied to materials and site costs
@@ -305,7 +320,7 @@ const groups = [
     ["HRM building permit", "", 150, 400, "notax"],
   ]},
   { name: "Labour", hours: true, items: [
-    ["Design and drawings", "Onshape model, span checks, permit drawings, cut list", 6, 14],
+    ["Modelling and bill of materials", "From your existing drawings: CAD model, span checks, bill of materials", 3, 8],
     ["Construction", "Footings through final cleanup", 74, 96],
   ]},
 ];
@@ -336,19 +351,15 @@ const tLo = lo, tHi = hi;
 row(`<td>Estimated total</td><td class="num">${fmt(tLo)}</td><td class="num">${fmt(tHi)}</td>`, "grand");
 document.getElementById("hero-total").textContent = `${fmt(tLo)} – ${fmt(tHi)}`;
 
-if (ONSHAPE_URL) {
-  for (const a of [document.getElementById("cad-link"), document.getElementById("thumb")]) {
-    a.href = ONSHAPE_URL; a.target = "_blank"; a.rel = "noopener";
-    a.removeAttribute("aria-disabled");
-  }
-  document.getElementById("cad-link").textContent = "Open the 3D model";
-}
-if (THUMBNAIL_SRC) {
-  const t = document.getElementById("thumb");
-  const img = new Image(); img.alt = "3D render of the deck design";
-  img.onload = () => { t.classList.add("has-img"); document.getElementById("thumb-ph").remove(); t.appendChild(img); };
-  img.src = THUMBNAIL_SRC;
-}
+/* 3D model lightbox: the big viewer only loads the model the first time it opens */
+const box = document.getElementById("model-box");
+const boxModel = document.getElementById("box-model");
+document.getElementById("thumb").addEventListener("click", () => {
+  if (!boxModel.getAttribute("src")) boxModel.setAttribute("src", "deck.glb");
+  if (box.showModal) box.showModal(); else window.open(document.getElementById("cad-link").href, "_blank");
+});
+box.querySelector(".sw-lightbox__close").addEventListener("click", () => box.close());
+box.addEventListener("click", e => { if (e.target === box) box.close(); });
 </script>
 </body>
 </html>
