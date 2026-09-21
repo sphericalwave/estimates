@@ -47,6 +47,17 @@
 .est .sw-home__cta{justify-content:flex-start}
 .est button.sw-home__btn{cursor:pointer}
 
+/* Pressure-treated vs cedar toggle */
+.wood-pick{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1rem;margin:1.25rem 0 1rem}
+.wood-pick .note{flex-basis:100%;margin:0}
+.wood-toggle{display:inline-flex;border:1px solid rgba(180,197,255,.4);border-radius:4px;overflow:hidden}
+.wood-toggle button,.wood-toggle button:hover{margin:0;padding:.6rem 1.1rem;border:0 !important;border-radius:0;cursor:pointer;
+  font-family:var(--sw-font-mono);font-size:13px !important;letter-spacing:.1em;text-transform:uppercase;
+  background-color:transparent !important;color:var(--sw-primary) !important}
+.wood-toggle button:hover{background-color:rgba(180,197,255,.08) !important}
+.wood-toggle button[aria-checked="true"]{background-color:var(--sw-primary-container) !important;color:var(--sw-on-primary-container) !important}
+@media print{.wood-toggle{display:none}}
+
 /* Timing */
 .temp{font-family:var(--sw-font-display);font-weight:600;font-size:1.2rem;color:var(--sw-primary)}
 
@@ -140,7 +151,7 @@ ol.steps b{color:var(--sw-on-surface);font-weight:600}
         <span class="sw-home__label">Estimate &middot; sphericalwave</span>
       </span>
       <h1 class="sw-home__title">Wraparound deck and patio</h1>
-      <p class="sw-home__lead">About 290 sq ft of pressure-treated deck at the upper floor: 21 × 10 ft across the back, wrapping 13 ft up the right side, with a full-width stair to a landing and patio stones under the deck at the walkout door.</p>
+      <p class="sw-home__lead">About 290 sq ft of <span data-opt-text="wood">pressure-treated</span> deck at the upper floor: 21 × 10 ft across the back, wrapping 13 ft up the right side, with a full-width stair to a landing and patio stones under the deck at the walkout door.</p>
       <p class="total"><strong id="hero-total">$0 – $0</strong><span>estimated total</span></p>
       <dl class="meta">
         <div><dt>Prepared for</dt><dd>[Customer name]</dd></div>
@@ -198,10 +209,11 @@ ol.steps b{color:var(--sw-on-surface);font-weight:600}
       <li>Deck modelled in CAD from your existing drawings, with a full bill of materials</li>
       <li>Permit drawings and HRM building permit</li>
       <li>Seven concrete footings to 4 ft below grade (below frost): 24" pads with 10" piers</li>
-      <li>6×6 posts no more than 8 ft apart, with triple 2×10 beams along the back and the right side</li>
+      <li><span data-opt-text="posts">6×6</span> posts no more than 8 ft apart, with triple 2×10 beams along the back and the right side</li>
+      <li>4×4 knee braces at 45° from each post up to the beam, so the posts can't roll over along the beam</li>
       <li>2×6 diagonal V-bracing under the joists, tying the frame back to the house so it can't rack</li>
       <li>2×8 joists at 16" on centre, off the existing ledger at the back and a new ledger on the side wall</li>
-      <li>5/4×6 pressure-treated decking, about 290 sq ft</li>
+      <li>5/4×6 <span data-opt-text="wood">pressure-treated</span> decking, about 290 sq ft</li>
       <li>42" guard railing on all open sides, about 54 ft</li>
       <li>6 ft wide stair off the end of the side section, with a guard and handrail on the open side, down to a 6 ft concrete landing cut level into the slope</li>
       <li>Patio stones under the back deck at the walkout door, about 250 sq ft on a compacted gravel base, out past the footings</li>
@@ -215,6 +227,22 @@ ol.steps b{color:var(--sw-on-surface);font-weight:600}
     <span class="sw-home__label">03 &middot; Cost</span>
     <h2 id="cost-h">Cost breakdown</h2>
     <p class="note">Shown as a low and high range. The final price depends mostly on what's found when digging the footings. Material and rental prices include the taxes paid on them; no HST is added to this estimate.</p>
+    <div class="wood-pick" role="radiogroup" aria-label="Decking and railing wood">
+      <span class="sw-home__label">Decking and railing</span>
+      <div class="wood-toggle">
+        <button type="button" role="radio" data-opt="wood" data-value="pt" aria-checked="true">Pressure-treated</button>
+        <button type="button" role="radio" data-opt="wood" data-value="cedar" aria-checked="false">Cedar</button>
+      </div>
+      <p class="note" id="wood-note"></p>
+    </div>
+    <div class="wood-pick" role="radiogroup" aria-label="Post size">
+      <span class="sw-home__label">Posts</span>
+      <div class="wood-toggle">
+        <button type="button" role="radio" data-opt="posts" data-value="p6" aria-checked="true">6×6</button>
+        <button type="button" role="radio" data-opt="posts" data-value="p4" aria-checked="false">4×4</button>
+      </div>
+      <p class="note" id="posts-note"></p>
+    </div>
     <div class="table-wrap">
       <table>
         <thead><tr><th scope="col">Item</th><th scope="col" class="num">Low</th><th scope="col" class="num">High</th></tr></thead>
@@ -315,6 +343,30 @@ const RATE = 65;          // labour rate, $/hr
 const PURCHASE_TAX = 0.14; // HST paid on materials and rentals, built into those prices
 const CONTINGENCY = 0.10; // applied to materials and site costs
 
+// Estimate options. Each choice can swap the detail and price of named items; hours are never swapped.
+const OPTIONS = {
+  // Visible wood only; framing, posts and stringers stay pressure-treated either way
+  wood: {
+    pt: { name: "pressure-treated",
+      note: "Pressure-treated: the budget choice. Weathers to grey; stain it after a season of drying." },
+    cedar: { name: "cedar",
+      note: "Cedar decking, railing and stair treads: warmer colour, naturally rot-resistant, stays straighter. Framing, posts and stringers stay pressure-treated.",
+      items: {
+        "Decking": ["5/4×6 western red cedar, about 290 sq ft plus stair treads", 3400, 4600],
+        "Guard railing": ["About 54 linear ft, 42\" high, cedar", 2800, 4300],
+        "Stair": ["6 ft wide, 6 risers: pressure-treated stringers, cedar treads and guard", 700, 1200],
+      } },
+  },
+  posts: {
+    p6: { name: "6×6",
+      note: "6×6 posts: what the building code generally expects for posts carrying a beam, and stiffer at this height." },
+    p4: { name: "4×4",
+      note: "4×4 posts: cheaper, but at about 6 ft tall carrying a beam, HRM may not accept them. Confirm before choosing.",
+      items: { "Posts": ["7 × 4×4 pressure-treated", 160, 240] } },
+  },
+};
+const choice = { wood: "pt", posts: "p6" };
+
 const groups = [
   { name: "Materials", items: [
     ["Footings", "7 footings to 4 ft: 24\" pads, 10\" tube forms, concrete, post bases", 520, 760],
@@ -323,6 +375,7 @@ const groups = [
     ["Side ledger, header and rims", "2×10 ledger on the side wall, 2×8 header and rim joists", 250, 400],
     ["Joists", "About 25 × 2×8 plus blocking", 500, 700],
     ["V-bracing", "2×6 diagonals under the joists, about 50 ft", 80, 150],
+    ["Knee braces", "12 × 4×4 at 45°, post to beam, with carriage bolts", 150, 260],
     ["Structural hardware", "Hangers, ledger fasteners, beam ties, structural screws", 550, 850],
     ["Decking", "5/4×6 pressure-treated, about 290 sq ft plus stair treads", 1400, 1900],
     ["Guard railing", "About 54 linear ft, 42\" high", 1350, 2150],
@@ -340,7 +393,7 @@ const groups = [
   { name: "Labour", hours: true, items: [
     ["Modelling and bill of materials", "From your existing drawings: CAD model, span checks, bill of materials", 3, 8],
     ["Footings", "Seven holes to 4 ft, forms, pour", 14, 21],
-    ["Framing", "Side ledger, posts, beams, joists, V-bracing", 32, 43],
+    ["Framing", "Side ledger, posts, beams, joists, V-bracing, knee braces", 35, 48],
     ["Decking", "", 14, 20],
     ["Railings", "", 18, 26],
     ["Stair and landing", "", 12, 18],
@@ -353,27 +406,43 @@ const fmt = n => n.toLocaleString("en-CA", { style: "currency", currency: "CAD",
 const body = document.getElementById("cost-body");
 const row = (html, cls) => { const tr = document.createElement("tr"); if (cls) tr.className = cls; tr.innerHTML = html; body.appendChild(tr); };
 
-let lo = 0, hi = 0, contLo = 0, contHi = 0;
-for (const g of groups) {
-  row(`<td colspan="3">${g.name}</td>`, "group");
-  let gLo = 0, gHi = 0;
-  for (const [label, detail, a, b, flag] of g.items) {
-    const tax = (g.hours || flag === "notax") ? 1 : 1 + PURCHASE_TAX;
-    const l = Math.round((g.hours ? a * RATE : a) * tax), h = Math.round((g.hours ? b * RATE : b) * tax);
-    const d = g.hours ? `${a}–${b} hrs at ${fmt(RATE)}/hr${detail ? ". " + detail : ""}` : detail;
-    row(`<td>${label}${d ? `<small>${d}</small>` : ""}</td><td class="num">${fmt(l)}</td><td class="num">${fmt(h)}</td>`);
-    gLo += l; gHi += h;
+function render() {
+  const alt = Object.assign({}, ...Object.keys(OPTIONS).map(k => OPTIONS[k][choice[k]].items || {}));
+  body.textContent = "";
+  let lo = 0, hi = 0, contLo = 0, contHi = 0;
+  for (const g of groups) {
+    row(`<td colspan="3">${g.name}</td>`, "group");
+    let gLo = 0, gHi = 0;
+    for (const item of g.items) {
+      const [label, flag] = [item[0], item[4]];
+      const [detail, a, b] = (!g.hours && alt[label]) || item.slice(1, 4);
+      const tax = (g.hours || flag === "notax") ? 1 : 1 + PURCHASE_TAX;
+      const l = Math.round((g.hours ? a * RATE : a) * tax), h = Math.round((g.hours ? b * RATE : b) * tax);
+      const d = g.hours ? `${a}–${b} hrs at ${fmt(RATE)}/hr${detail ? ". " + detail : ""}` : detail;
+      row(`<td>${label}${d ? `<small>${d}</small>` : ""}</td><td class="num">${fmt(l)}</td><td class="num">${fmt(h)}</td>`);
+      gLo += l; gHi += h;
+    }
+    row(`<td>${g.name} subtotal</td><td class="num">${fmt(gLo)}</td><td class="num">${fmt(gHi)}</td>`, "sub");
+    lo += gLo; hi += gHi;
+    if (!g.hours) { contLo += gLo * CONTINGENCY; contHi += gHi * CONTINGENCY; }
   }
-  row(`<td>${g.name} subtotal</td><td class="num">${fmt(gLo)}</td><td class="num">${fmt(gHi)}</td>`, "sub");
-  lo += gLo; hi += gHi;
-  if (!g.hours) { contLo += gLo * CONTINGENCY; contHi += gHi * CONTINGENCY; }
+  row(`<td colspan="3">Other</td>`, "group");
+  row(`<td>Contingency<small>${CONTINGENCY * 100}% of materials and site costs</small></td><td class="num">${fmt(contLo)}</td><td class="num">${fmt(contHi)}</td>`);
+  lo += contLo; hi += contHi;
+  row(`<td>Estimated total</td><td class="num">${fmt(lo)}</td><td class="num">${fmt(hi)}</td>`, "grand");
+  document.getElementById("hero-total").textContent = `${fmt(lo)} – ${fmt(hi)}`;
+  for (const k of Object.keys(OPTIONS)) {
+    const opt = OPTIONS[k][choice[k]];
+    document.getElementById(k + "-note").textContent = opt.note;
+    document.querySelectorAll(`[data-opt-text="${k}"]`).forEach(el => { el.textContent = opt.name; });
+    document.querySelectorAll(`.wood-toggle button[data-opt="${k}"]`).forEach(btn => btn.setAttribute("aria-checked", btn.dataset.value === choice[k]));
+  }
 }
-row(`<td colspan="3">Other</td>`, "group");
-row(`<td>Contingency<small>${CONTINGENCY * 100}% of materials and site costs</small></td><td class="num">${fmt(contLo)}</td><td class="num">${fmt(contHi)}</td>`);
-lo += contLo; hi += contHi;
-const tLo = lo, tHi = hi;
-row(`<td>Estimated total</td><td class="num">${fmt(tLo)}</td><td class="num">${fmt(tHi)}</td>`, "grand");
-document.getElementById("hero-total").textContent = `${fmt(tLo)} – ${fmt(tHi)}`;
+document.querySelectorAll(".wood-toggle button").forEach(btn => btn.addEventListener("click", () => {
+  choice[btn.dataset.opt] = btn.dataset.value;
+  render();
+}));
+render();
 
 /* 3D model lightbox: the big viewer only loads the model the first time it opens */
 const box = document.getElementById("model-box");
