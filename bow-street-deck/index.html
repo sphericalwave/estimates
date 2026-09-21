@@ -197,8 +197,9 @@ ol.steps b{color:var(--sw-on-surface);font-weight:600}
     <ul class="scope">
       <li>Deck modelled in CAD from your existing drawings, with a full bill of materials</li>
       <li>Permit drawings and HRM building permit</li>
-      <li>Nine concrete footings to 4 ft below grade (below frost): 24" pads with 10" piers</li>
-      <li>6×6 posts and triple 2×10 beams along the back and the right side</li>
+      <li>Seven concrete footings to 4 ft below grade (below frost): 24" pads with 10" piers</li>
+      <li>6×6 posts no more than 8 ft apart, with triple 2×10 beams along the back and the right side</li>
+      <li>2×6 diagonal V-bracing under the joists, tying the frame back to the house so it can't rack</li>
       <li>2×8 joists at 16" on centre, off the existing ledger at the back and a new ledger on the side wall</li>
       <li>5/4×6 pressure-treated decking, about 290 sq ft</li>
       <li>42" guard railing on all open sides, about 54 ft</li>
@@ -231,8 +232,8 @@ ol.steps b{color:var(--sw-on-surface);font-weight:600}
     <ol class="steps">
       <li><div><b>Measure and model.</b> Check your drawings against the site, model the deck, produce the bill of materials, your sign-off.</div></li>
       <li><div><b>Permit.</b> Drawings submitted to HRM; work starts once approved.</div></li>
-      <li><div><b>Footings.</b> Dig nine holes to 4 ft, set forms, pour while nights are still above 5&nbsp;°C. Concrete cures for several days.</div></li>
-      <li><div><b>Framing.</b> Side ledger, posts, beams, joists, hangers and bracing.</div></li>
+      <li><div><b>Footings.</b> Dig seven holes to 4 ft, set forms, pour while nights are still above 5&nbsp;°C. Concrete cures for several days.</div></li>
+      <li><div><b>Framing.</b> Side ledger, posts, beams, joists, hangers and V-bracing.</div></li>
       <li><div><b>Decking.</b> Boards installed and trimmed.</div></li>
       <li><div><b>Railings and stairs.</b> Guards, stair stringers, treads and handrails; landing cut in and poured.</div></li>
       <li><div><b>Patio.</b> Excavate under the back deck, compact the gravel base, lay the stones.</div></li>
@@ -316,11 +317,12 @@ const CONTINGENCY = 0.10; // applied to materials and site costs
 
 const groups = [
   { name: "Materials", items: [
-    ["Footings", "9 footings to 4 ft: 24\" pads, 10\" tube forms, concrete, post bases", 650, 950],
-    ["Posts", "9 × 6×6 pressure-treated", 500, 700],
+    ["Footings", "7 footings to 4 ft: 24\" pads, 10\" tube forms, concrete, post bases", 520, 760],
+    ["Posts", "7 × 6×6 pressure-treated", 400, 560],
     ["Beams", "Triple 2×10, about 21 ft along the back and 21 ft along the side", 400, 550],
     ["Side ledger, header and rims", "2×10 ledger on the side wall, 2×8 header and rim joists", 250, 400],
     ["Joists", "About 25 × 2×8 plus blocking", 500, 700],
+    ["V-bracing", "2×6 diagonals under the joists, about 50 ft", 80, 150],
     ["Structural hardware", "Hangers, ledger fasteners, beam ties, structural screws", 550, 850],
     ["Decking", "5/4×6 pressure-treated, about 290 sq ft plus stair treads", 1400, 1900],
     ["Guard railing", "About 54 linear ft, 42\" high", 1350, 2150],
@@ -337,8 +339,8 @@ const groups = [
   ]},
   { name: "Labour", hours: true, items: [
     ["Modelling and bill of materials", "From your existing drawings: CAD model, span checks, bill of materials", 3, 8],
-    ["Footings", "Nine holes to 4 ft, forms, pour", 18, 26],
-    ["Framing", "Side ledger, posts, beams, joists", 30, 40],
+    ["Footings", "Seven holes to 4 ft, forms, pour", 14, 21],
+    ["Framing", "Side ledger, posts, beams, joists, V-bracing", 32, 43],
     ["Decking", "", 14, 20],
     ["Railings", "", 18, 26],
     ["Stair and landing", "", 12, 18],
