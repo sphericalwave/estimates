@@ -208,13 +208,14 @@ ol.steps b{color:var(--sw-on-surface);font-weight:600}
     <ul class="scope">
       <li>Deck modelled in CAD from your existing drawings, with a full bill of materials</li>
       <li>Permit drawings and HRM building permit</li>
-      <li>Seven concrete footings to 4 ft below grade (below frost): 24" pads with 10" piers</li>
+      <li>Seven 10" round concrete piers to 4 ft below grade (below frost)</li>
       <li>6×6 posts no more than 8 ft apart, with triple 2×10 beams along the back and the right side</li>
       <li>4×4 knee braces at 45° from each post up to the beam, so the posts can't roll over along the beam</li>
       <li>2×6 diagonal V-bracing under the joists, tying the frame back to the house so it can't rack</li>
       <li>2×8 joists at 16" on centre, off the existing ledger at the back and a new ledger on the side wall</li>
-      <li>5/4×6 <span data-opt-text="wood">pressure-treated</span> decking, about 290 sq ft</li>
-      <li>42" guard railing on all open sides, about 54 ft</li>
+      <li>Solid 2×8 blocking between the joists over both beams and at mid-span on the back section, as the building code requires</li>
+      <li>5/4×6 <span data-opt-text="wood">pressure-treated</span> decking, about 290 sq ft, with 3/8" gaps for drainage</li>
+      <li>42" guard railing on all open sides, about 54 ft, with <span data-opt-text="balusters">2×2 wood</span> balusters</li>
       <li>6 ft wide stair off the end of the side section: 2×12 stringers hung from a doubled 2×12 stair header and tied together underneath, closed risers, and a guard with a 2×6 handrail on the open side, down to a 6 ft concrete landing cut level into the slope</li>
       <li>Patio stones under the back deck at the walkout door, about 250 sq ft on a compacted gravel base, out past the footings</li>
       <li>Hidden deck fasteners (no screw heads on the deck surface); all fasteners rated for treated lumber, stainless with cedar</li>
@@ -236,6 +237,14 @@ ol.steps b{color:var(--sw-on-surface);font-weight:600}
       </div>
       <p class="note" id="wood-note"></p>
     </div>
+    <div class="wood-pick" role="radiogroup" aria-label="Balusters">
+      <span class="sw-home__label">Balusters</span>
+      <div class="wood-toggle">
+        <button type="button" role="radio" data-opt="balusters" data-value="wood" aria-checked="true">Wood 2×2</button>
+        <button type="button" role="radio" data-opt="balusters" data-value="aluminum" aria-checked="false">Aluminum round</button>
+      </div>
+      <p class="note" id="balusters-note"></p>
+    </div>
     <div class="table-wrap">
       <table>
         <thead><tr><th scope="col">Item</th><th scope="col" class="num">Low</th><th scope="col" class="num">High</th></tr></thead>
@@ -249,7 +258,7 @@ ol.steps b{color:var(--sw-on-surface);font-weight:600}
   <section class="sw-home__glass sw-home__panel" aria-labelledby="sched-h">
     <span class="sw-home__label">04 &middot; Schedule</span>
     <h2 id="sched-h">How the job runs</h2>
-    <p class="note">About 115–170 hours of work in total, spread over roughly four to six weeks, including permit time and concrete curing.</p>
+    <p class="note">About 115–175 hours of work in total, spread over roughly four to six weeks, including permit time and concrete curing.</p>
     <ol class="steps">
       <li><div><b>Measure and model.</b> Check your drawings against the site, model the deck, produce the bill of materials, your sign-off.</div></li>
       <li><div><b>Permit.</b> Drawings submitted to HRM; work starts once approved.</div></li>
@@ -284,7 +293,7 @@ ol.steps b{color:var(--sw-on-surface);font-weight:600}
           <li>Rock or ledge removal beyond normal digging</li>
           <li>Ledger repair or replacement, if needed</li>
           <li>Stain or sealer (wood should dry for a season first)</li>
-          <li>Composite decking, aluminum or glass railings, lighting</li>
+          <li>Composite decking, glass railings, lighting</li>
           <li>Landscaping around the finished deck</li>
         </ul>
       </div>
@@ -346,26 +355,38 @@ const OPTIONS = {
       note: "Cedar decking, railing and stair treads: warmer colour, naturally rot-resistant, stays straighter. Framing, posts and stringers stay pressure-treated.",
       items: {
         "Decking": ["5/4×6 western red cedar, about 290 sq ft plus stair treads", 3400, 4600],
-        "Guard railing": ["About 54 linear ft, 42\" high, cedar", 2800, 4300],
+        "Guard railing": ["About 54 linear ft, 42\" high, cedar posts, rails and caps", 2250, 3650],
+        "Balusters": ["About 135 cedar 2×2 balusters", 520, 700],
         "Stair": ["6 ft wide, 6 risers: pressure-treated stringers, header and ties, cedar treads, risers, guard and handrail", 870, 1430],
         "Hidden deck screws": ["About 1,150 stainless edge screws (cedar needs stainless to avoid black staining)", 260, 340],
         "Cap and baluster screws": ["About 600 stainless exterior screws, 2-1/2\" and 3\"", 140, 200],
       } },
   },
+  // Listed after wood so aluminum replaces the baluster line whichever wood is chosen
+  balusters: {
+    wood: { name: "2×2 wood",
+      note: "2×2 wood balusters in the same wood as the railing, under 4\" apart." },
+    aluminum: { name: "black aluminum round",
+      note: "3/4\" black aluminum balusters: slimmer look, no finishing, never split. Set on 4-1/2\" centres to stay under the code's 100 mm gap.",
+      items: {
+        "Balusters": ["About 145 black aluminum 3/4\" round balusters with connectors, plus stair kits", 860, 1100],
+      } },
+  },
 };
-const choice = { wood: "pt" };
+const choice = { wood: "pt", balusters: "wood" };
 
 const groups = [
   { name: "Materials", items: [
-    ["Footings", "7 footings to 4 ft: 24\" pads, 10\" tube forms, concrete, post bases", 520, 760],
+    ["Footings", "7 × 10\" concrete piers to 4 ft in tube forms, concrete, post bases", 380, 600],
     ["Posts", "7 × 6×6 pressure-treated", 400, 560],
     ["Beams", "Triple 2×10, about 21 ft along the back and 21 ft along the side", 400, 550],
     ["Side ledger, header and rims", "2×10 ledger on the side wall, 2×8 header and rim joists", 250, 400],
-    ["Joists", "About 25 × 2×8 plus blocking", 500, 700],
+    ["Joists and blocking", "About 25 × 2×8 joists, plus 42 solid 2×8 blocks in rows over both beams and at mid-span", 640, 860],
     ["V-bracing", "2×6 diagonals under the joists, about 50 ft", 80, 150],
     ["Knee braces", "12 × 4×4 at 45°, post to beam", 80, 130],
     ["Decking", "5/4×6 pressure-treated, about 290 sq ft plus stair treads", 1400, 1900],
-    ["Guard railing", "About 54 linear ft, 42\" high", 1350, 2150],
+    ["Guard railing", "About 54 linear ft, 42\" high: posts, rails and caps", 1100, 1850],
+    ["Balusters", "About 135 pressure-treated 2×2 balusters", 280, 380],
     ["Stair", "6 ft wide, 6 risers: 2×12 stringers on a doubled 2×12 header, 3 stringer ties, treads, closed risers, guard and 2×6 handrail", 600, 980],
     ["Stair landing", "6 ft concrete landing cut into the slope, low retaining edge", 400, 750],
     ["Patio stones", "About 250 sq ft of 24\" slabs, gravel base, bedding sand", 1100, 1800],
@@ -375,10 +396,11 @@ const groups = [
     ["Joist hangers", "25 galvanized 2×8 hangers with hanger screws", 160, 220],
     ["Side ledger fasteners", "18 structural ledger screws, staggered, plus ledger flashing", 110, 170],
     ["Beam lamination", "60 structural screws through the 3 plies, 2 rows at 16\"", 140, 200],
+    ["Beam hanger", "Heavy face-mount hanger carrying the side beam off the back beam, with its screws", 40, 70],
     ["Post bases", "7 raised post bases with anchors into the piers", 260, 360],
     ["Post caps", "7 caps tying the 6×6 posts to the triple beams", 140, 220],
     ["Knee brace screws", "48 × 6\" structural screws, 2 at each end of each brace", 75, 110],
-    ["Rim, header, V-brace, stair tie and blocking screws", "About 225 × 3\" structural screws", 100, 160],
+    ["Rim, header, V-brace, stair tie and blocking screws", "About 225 × 3\" structural screws, plus about 170 × 3-1/2\" screws for the joist blocking", 150, 220],
     ["Guard post bolts", "24 × 8\" structural through-bolts, 2 per railing post through the rim and blocking", 110, 160],
     ["Pocket-hole screws", "About 100 exterior pocket screws for the rails", 25, 40],
     ["Cap and baluster screws", "About 600 coated exterior screws, 2-1/2\" and 3\"", 60, 100],
@@ -394,7 +416,7 @@ const groups = [
   { name: "Labour", hours: true, items: [
     ["Modelling and bill of materials", "From your existing drawings: CAD model, span checks, bill of materials", 3, 8],
     ["Footings", "Seven holes to 4 ft, forms, pour", 14, 21],
-    ["Framing", "Side ledger, posts, beams, joists, V-bracing, knee braces", 35, 48],
+    ["Framing", "Side ledger, posts, beams, joists, blocking, V-bracing, knee braces", 37, 51],
     ["Decking", "", 14, 20],
     ["Railings", "", 18, 26],
     ["Stair and landing", "", 12, 18],
