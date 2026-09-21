@@ -215,8 +215,9 @@ ol.steps b{color:var(--sw-on-surface);font-weight:600}
       <li>2×8 joists at 16" on centre, off the existing ledger at the back and a new ledger on the side wall</li>
       <li>5/4×6 <span data-opt-text="wood">pressure-treated</span> decking, about 290 sq ft</li>
       <li>42" guard railing on all open sides, about 54 ft</li>
-      <li>6 ft wide stair off the end of the side section, with a guard and handrail on the open side, down to a 6 ft concrete landing cut level into the slope</li>
+      <li>6 ft wide stair off the end of the side section: 2×12 stringers, closed risers, and a guard with a 2×6 handrail on the open side, down to a 6 ft concrete landing cut level into the slope</li>
       <li>Patio stones under the back deck at the walkout door, about 250 sq ft on a compacted gravel base, out past the footings</li>
+      <li>Hidden deck fasteners (no screw heads on the deck surface); all fasteners rated for treated lumber, stainless with cedar</li>
       <li>Deliveries, equipment rental, and site cleanup</li>
     </ul>
   </section>
@@ -346,7 +347,9 @@ const OPTIONS = {
       items: {
         "Decking": ["5/4×6 western red cedar, about 290 sq ft plus stair treads", 3400, 4600],
         "Guard railing": ["About 54 linear ft, 42\" high, cedar", 2800, 4300],
-        "Stair": ["6 ft wide, 6 risers: pressure-treated stringers, cedar treads and guard", 700, 1200],
+        "Stair": ["6 ft wide, 6 risers: pressure-treated stringers, cedar treads, risers, guard and handrail", 800, 1350],
+        "Hidden deck screws": ["About 1,150 stainless edge screws (cedar needs stainless to avoid black staining)", 260, 340],
+        "Cap and baluster screws": ["About 600 stainless exterior screws, 2-1/2\" and 3\"", 140, 200],
       } },
   },
 };
@@ -360,13 +363,26 @@ const groups = [
     ["Side ledger, header and rims", "2×10 ledger on the side wall, 2×8 header and rim joists", 250, 400],
     ["Joists", "About 25 × 2×8 plus blocking", 500, 700],
     ["V-bracing", "2×6 diagonals under the joists, about 50 ft", 80, 150],
-    ["Knee braces", "12 × 4×4 at 45°, post to beam, with carriage bolts", 150, 260],
-    ["Structural hardware", "Hangers, ledger fasteners, beam ties, structural screws", 550, 850],
+    ["Knee braces", "12 × 4×4 at 45°, post to beam", 80, 130],
     ["Decking", "5/4×6 pressure-treated, about 290 sq ft plus stair treads", 1400, 1900],
     ["Guard railing", "About 54 linear ft, 42\" high", 1350, 2150],
-    ["Stair", "6 ft wide, 6 risers: stringers, treads, guard on the open side", 450, 800],
+    ["Stair", "6 ft wide, 6 risers: 2×12 stringers, treads, closed risers, guard and 2×6 handrail", 530, 900],
     ["Stair landing", "6 ft concrete landing cut into the slope, low retaining edge", 400, 750],
     ["Patio stones", "About 250 sq ft of 24\" slabs, gravel base, bedding sand", 1100, 1800],
+  ]},
+  { name: "Fasteners and connectors", items: [
+    ["Hidden deck screws", "About 1,150 coated edge screws, 2 per board at each joist, no heads on the deck surface", 170, 240],
+    ["Joist hangers", "27 galvanized 2×8 hangers with hanger screws", 170, 230],
+    ["Side ledger fasteners", "About 24 structural ledger screws, staggered, plus ledger flashing", 110, 170],
+    ["Beam lamination", "About 130 structural screws through the 3 plies, 2 rows at 16\"", 210, 290],
+    ["Post bases", "7 raised post bases with anchors into the piers", 260, 360],
+    ["Post caps", "7 caps tying the 6×6 posts to the triple beams", 140, 220],
+    ["Knee brace screws", "48 × 6\" structural screws, 2 at each end of each brace", 75, 110],
+    ["Rim, header, V-brace and blocking screws", "About 200 × 3\" structural screws", 90, 140],
+    ["Guard post bolts", "24 × 8\" structural through-bolts, 2 per railing post through the rim and blocking", 110, 160],
+    ["Pocket-hole screws", "About 100 exterior pocket screws for the rails", 25, 40],
+    ["Cap and baluster screws", "About 600 coated exterior screws, 2-1/2\" and 3\"", 60, 100],
+    ["Stair connectors", "6 stringer hangers at the rim, 6 angles and concrete screws at the landing, riser screws", 110, 170],
   ]},
   { name: "Site and equipment", items: [
     ["Auger and plate compactor rental", "Footings, landing and patio base", 250, 500],
